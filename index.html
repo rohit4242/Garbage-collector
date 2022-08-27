@@ -97,7 +97,7 @@
               Get Started with Simple SING-IN And enjoy the Services
 
             </p>
-            <button class="btn transparent" id="sign-in-btn">
+            <button class="btn transparent" id="sign-in-btn" onclick="login()">
               Sign in
             </button>
           </div>
@@ -110,24 +110,9 @@
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
-    import { getDatabase } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+    import { getDatabase,set,ref } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
     import {getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAv2eXz01yFnv3SYrr0Srah6rcZs5YrvKA",
-      authDomain: "first-project-ce849.firebaseapp.com",
-      projectId: "first-project-ce849",
-      storageBucket: "first-project-ce849.appspot.com",
-      messagingSenderId: "192688794206",
-      appId: "1:192688794206:web:e0b20f3d2cb0c10387a2cf"
-
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-    const auth = getAuth();
-
+  
   </script>
   <script src="register.js"></script>
  
