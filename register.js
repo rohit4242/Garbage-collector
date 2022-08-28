@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
 import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCOQdgJmP3fwrjPZsdzyM6QmN0o56yHMVY",
@@ -15,7 +15,7 @@ const firebaseConfig = {
   // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-// const database = getDatabase(app);
+const database = getDatabase(app);
 
 let sing_up = document.getElementById('sign_up');
 let sing_in = document.getElementById('login');
@@ -30,6 +30,9 @@ sing_up.addEventListener('click',function (e){
     // Signed in 
     const user = userCredential.user;
     console.log(user);
+    writeUserData(uid,username, email);
+    // database_ref.child('users/'+ user.uid).set(user_data);
+    alert('user created');
     // ...
     })
     .catch((error) => {
@@ -101,7 +104,6 @@ sing_in.addEventListener('click',function (e){
     // Signed in 
         const user = userCredential.user;
         console.log(user);
-    // ...
     })
     .catch((error) => {
         const errorCode = error.code;
@@ -180,7 +182,13 @@ sing_in.addEventListener('click',function (e){
 //         return true;
 //     }
 // }
-
+function writeUserData(userId, name, email) {
+    const db = getDatabase();
+    set(ref(db, 'users/' + userId), {
+      username: name,
+      email: email,
+    });
+}
 function validate_field(field){
     if(field == null){
         return false;
