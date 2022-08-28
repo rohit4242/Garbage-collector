@@ -4,57 +4,65 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-d
 
 const firebaseConfig = {
     apiKey: "AIzaSyCOQdgJmP3fwrjPZsdzyM6QmN0o56yHMVY",
-    authDomain: "localhost",
+    authDomain: "garbage-collector-13142.firebaseapp.com",
     databaseURL: "https://garbage-collector-13142-default-rtdb.firebaseio.com",
     projectId: "garbage-collector-13142",
     storageBucket: "garbage-collector-13142.appspot.com",
     messagingSenderId: "214211705907",
-    appId: "1:214211705907:web:f22e3dcb4b62964e93f746",
-    measurementId: "G-CGMTVM3TQK"
+    appId: "1:214211705907:web:a8349a3d5028a15693f746",
+    measurementId: "G-LW2H7PVL3H"
 };
   // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const database = getDatabase(app);
+// const database = getDatabase(app);
 
-let sing_up = document.getElementById('sign-up-btn');
-let sing_in = document.getElementById('sign-in-btn');
+let sing_up = document.getElementById('sign_up');
+let sing_in = document.getElementById('login');
 
 sing_up.addEventListener('click',function (e){
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     let username = document.getElementById('username').value;
 
-    if(validate_password(password) == false){
-        alert('email or password is invalid');
-        return
-    }
-
-    if(validate_field(username) == false){
-        alert('one more extra fields is empty');
-        return
-    }
-    createUserWithEmailAndPassword(email, username, password).then((userCredential) => {
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
     // Signed in 
-        const user = userCredential.user;
-        var database_ref = database.ref();
-        var user_data = {
-                email: email,
-                username: username,
-                last_login: Date.now()
-            };
-
-        database_ref.child('users/'+ user.uid).set(user_data);
-        alert('user created');
-
+    const user = userCredential.user;
+    console.log(user);
     // ...
     })
     .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage);
     // ..
     });
+    // if(validate_field(username) == false){
+    //     alert('one more extra fields is empty');
+    //     return
+    // }
+    // createUserWithEmailAndPassword(auth,email, username, password).then((userCredential) => {
+    // // Signed in 
+    //     const user = userCredential.user;
+    //     var database_ref = database.ref();
+    //     var user_data = {
+    //             email: email,
+    //             username: username,
+    //             last_login: Date.now()
+    //         };
+
+    //     database_ref.child('users/'+ user.uid).set(user_data);
+    //     alert('user created');
+
+    // // ...
+    // })
+    // .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     alert(errorMessage);
+    // // ..
+    // });
 
 })
 
@@ -88,24 +96,11 @@ sing_in.addEventListener('click',function (e){
     let email = document.getElementById('email').value
     let password = document.getElementById('password').value
   
-    // Validate input fields
-    if (validate_password(password) == false) {
-      alert('Email or Password is Outta Line!!')
-      return
-      // Don't continue running the code
-    }
-
-    signInWithEmailAndPassword(email, password).then((userCredential) => {
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
     // Signed in 
-        console.log('ok');
         const user = userCredential.user;
-        var database_ref = database.ref();
-        var user_data = {
-                last_login : Date.now()
-            }
-        database_ref.child('users/' + user.uid).update(user_data)
-                // DOne
-        alert('User Logged In!!')
+        console.log(user);
     // ...
     })
     .catch((error) => {
@@ -113,6 +108,31 @@ sing_in.addEventListener('click',function (e){
         const errorMessage = error.message;
         alert(errorMessage);
     });
+
+    // Validate input fields
+    // if (validate_password(password) == false) {
+    //   alert('Email or Password is Outta Line!!')
+    //   return
+    //   // Don't continue running the code
+    // }
+    // signInWithEmailAndPassword(auth,email, password).then((userCredential) => {
+    // // Signed in 
+    //     console.log('ok');
+    //     const user = userCredential.user;
+    //     var database_ref = database.ref();
+    //     var user_data = {
+    //             last_login : Date.now()
+    //         }
+    //     database_ref.child('users/' + user.uid).update(user_data)
+    //             // DOne
+    //     alert('User Logged In!!')
+    // // ...
+    // })
+    // .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     alert(errorMessage);
+    // });
   
 });
 // function login() {
@@ -152,14 +172,14 @@ sing_in.addEventListener('click',function (e){
 //     }
 // }
 
-function validate_password(password){
-    if(password < 6){
-        return false;
-    }
-    else{
-        return true;
-    }
-}
+// function validate_password(password){
+//     if(password < 6){
+//         return false;
+//     }
+//     else{
+//         return true;
+//     }
+// }
 
 function validate_field(field){
     if(field == null){
