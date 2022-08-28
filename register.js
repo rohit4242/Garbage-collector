@@ -2,21 +2,29 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase
 import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
 
+
 const firebaseConfig = {
-    apiKey: "AIzaSyCOQdgJmP3fwrjPZsdzyM6QmN0o56yHMVY",
-    authDomain: "garbage-collector-13142.firebaseapp.com",
-    databaseURL: "https://garbage-collector-13142-default-rtdb.firebaseio.com",
-    projectId: "garbage-collector-13142",
-    storageBucket: "garbage-collector-13142.appspot.com",
-    messagingSenderId: "214211705907",
-    appId: "1:214211705907:web:a8349a3d5028a15693f746",
-    measurementId: "G-LW2H7PVL3H"
-};
+    apiKey: "AIzaSyCLSyC1oKaACIZvHYApKU7WS1xNF05O2Ig",
+    authDomain: "new-app-10ea7.firebaseapp.com",
+    projectId: "new-app-10ea7",
+    storageBucket: "new-app-10ea7.appspot.com",
+    messagingSenderId: "78696784146",
+    appId: "1:78696784146:web:103ee52d047c25d56a13cb",
+    databaseURL: "https://new-app-10ea7-default-rtdb.firebaseio.com/"
+  };
+
   // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const database = getDatabase(app);
+const db = getDatabase(app);
 
+function writeUserData(userId, name, email) {
+    const reference = ref(db, 'users/' + userId);
+    set(reference, {
+      username: name,
+      email: email
+    });
+}
 let sing_up = document.getElementById('sign_up');
 let sing_in = document.getElementById('login');
 
@@ -25,14 +33,11 @@ sing_up.addEventListener('click',function (e){
     let password = document.getElementById('password').value;
     let username = document.getElementById('username').value;
 
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
     console.log(user);
-    writeUserData(uid,username, email);
-    // database_ref.child('users/'+ user.uid).set(user_data);
-    alert('user created');
+    writeUserData('user', username, email);
     // ...
     })
     .catch((error) => {
@@ -182,13 +187,7 @@ sing_in.addEventListener('click',function (e){
 //         return true;
 //     }
 // }
-function writeUserData(userId, name, email) {
-    const db = getDatabase();
-    set(ref(db, 'users/' + userId), {
-      username: name,
-      email: email,
-    });
-}
+
 function validate_field(field){
     if(field == null){
         return false;
