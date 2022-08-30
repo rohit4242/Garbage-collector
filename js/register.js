@@ -57,7 +57,7 @@ sing_in.addEventListener('click',function (e){
         update(reference, {
           last_login: Date.now()
         });
-        location.replace('new.html');
+        location.replace('dashboard.html');
 
     })
     .catch((error) => {
