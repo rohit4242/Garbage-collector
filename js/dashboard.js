@@ -17,7 +17,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-
 let no = 0;
 let tbody = document.getElementById('tbody');
 function AddItemToTable(location,floar,no_dustbin,status){

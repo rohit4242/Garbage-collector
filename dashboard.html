@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/dashboard.css" />
 
-    <title>Dashboard</title>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/menu.css" />
+
+  <title>Dashboard</title>
 </head>
+
 <body>
-    <h1>Dustbin Current Status</h1> 
+  <div class="container">
+    <!-- <div class="menu">
+      <a href="#">Home</a>
+      <a href="#">Dustbin</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div> -->
+    <h1>Dustbin Current Status</h1>
     <div class="dustbin_status_table">
-        <table class="content-table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Location</th>
-                <th>Floar</th>
-                <th>No Dustbin</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-        </table>
+      <table class="content-table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Location</th>
+            <th>Floar</th>
+            <th>No Dustbin</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
     </div>
-    <script type="module" src="js/dashboard.js"></script>
+    <div class="trash-img">
+      <img src="svg/s5.svg">
+      <img src="svg/s5.svg">
+      <img src="svg/s5.svg">
+    </div>
+  </div>
+
+  <script type="module" src="js/dashboard.js"></script>
 </body>
+
 </html>
