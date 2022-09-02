@@ -1,4 +1,4 @@
-body {
+body{
     margin: 0;
     padding: 0;
     height: 200vh;
@@ -10,28 +10,6 @@ body {
     max-width: 600px;
     margin:auto;
 }
-/* .menu{
-    display: flex;
-    justify-content: center;
-    justify-content: space-between;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    font-weight: 300;
-    transition: all 0.5s ease-in-out;
-    position: relative;
-    text-transform: uppercase;
-}
-a:hover{
-    color:#00cc99;
-}
-a:active{
-    color:#009879;
-} */
 
 h1 {
     text-align: center;
@@ -57,7 +35,7 @@ h1 {
     min-width: inherit;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
-    color: white;
+    color:#009879;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -90,6 +68,10 @@ h1 {
     font-weight: bold;
     color: #009879;
     background-color: #f3f3f3;
+}
+.labs{
+    display: inline-block;
+    width: 100px;
 }
 
 @media (max-width:330) {

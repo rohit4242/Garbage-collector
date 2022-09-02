@@ -18,6 +18,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 let no = 0;
+let dustbin_list = [];
 let tbody = document.getElementById('tbody');
 function AddItemToTable(location,floar,no_dustbin,status){
     let trow = document.createElement("tr");
@@ -26,6 +27,8 @@ function AddItemToTable(location,floar,no_dustbin,status){
     let td3 = document.createElement('td');
     let td4 = document.createElement('td');
     let td5 = document.createElement('td');
+
+    dustbin_list.push([location,floar,no_dustbin,status]);
 
     td1.innerHTML = ++no;
     td2.innerHTML = location;
@@ -39,6 +42,11 @@ function AddItemToTable(location,floar,no_dustbin,status){
     trow.appendChild(td4);
     trow.appendChild(td5);
 
+    let controlDiv = document.createElement("div");
+    controlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null)">Add New Record</button>'
+    controlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes('+no+')">Edit Record</button>'
+
+    trow.appendChild(controlDiv);
     tbody.appendChild(trow);
 }
 
@@ -66,3 +74,38 @@ function GetAllDataRealtime(){
 }
 
 window.onload = GetAllDataRealtime();
+
+let ModLocation = document.getElementById('LocationMod');
+let ModFloar = document.getElementById('FloarMod');
+let ModDustbin = document.getElementById('NoDustbinMod');
+let ModStatus = document.getElementById('StatusMod');
+
+let AddModebtn = document.getElementById('addModbtn');
+let updateModbtn = document.getElementById('updateModbtn');
+let deleteModbtn = document.getElementById('deleteModbtn');
+
+function FillTboxes(index){
+    if(index == null)
+    {
+        ModLocation.value = "";
+        ModFloar.value = "";
+        ModDustbin.value = "";
+        ModStatus.value = "";
+        AddModebtn.style.display = 'inline-block';
+        updateModbtn.style.display = 'none';
+        deleteModbtn.style.display = 'none';
+
+    }
+    else{
+        --index;
+        ModLocation.value = dustbin_list[index][0];
+        ModFloar.value = dustbin_list[index][1];
+        ModDustbin.value =  dustbin_list[index][2];
+        ModStatus.value =  dustbin_list[index][3];
+
+        AddModebtn.style.display = 'none';
+        updateModbtn.style.display = 'inline-block';
+        deleteModbtn.style.display = 'inline-block';
+
+    }
+}
