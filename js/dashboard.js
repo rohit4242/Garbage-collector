@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
-import { getDatabase, ref, set,update,onValue} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+import { getDatabase, ref, set, update, onValue } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
 
 
 const firebaseConfig = {
@@ -11,16 +11,16 @@ const firebaseConfig = {
     appId: "1:54078532257:web:643ff5aec7f6b3f8831ee0",
     databaseURL: "https://test-d9a94-default-rtdb.firebaseio.com/"
 
-  };
+};
 
-  // Initialize Firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 let no = 0;
 let dustbin_list = [];
 let tbody = document.getElementById('tbody');
-function AddItemToTable(location,floar,no_dustbin,status){
+function AddItemToTable(location, floar, no_dustbin, status) {
     let trow = document.createElement("tr");
     let td1 = document.createElement('td');
     let td2 = document.createElement('td');
@@ -28,7 +28,7 @@ function AddItemToTable(location,floar,no_dustbin,status){
     let td4 = document.createElement('td');
     let td5 = document.createElement('td');
 
-    dustbin_list.push([location,floar,no_dustbin,status]);
+    dustbin_list.push([location, floar, no_dustbin, status]);
 
     td1.innerHTML = ++no;
     td2.innerHTML = location;
@@ -43,31 +43,31 @@ function AddItemToTable(location,floar,no_dustbin,status){
     trow.appendChild(td5);
 
     let controlDiv = document.createElement("div");
-    controlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onClick="FillTboxes(null)">Add New Record</button>'
-    controlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onClick="FillTboxes('+no+')">Edit Record</button>'
+    controlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null)">Add New Record</button>'
+    controlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(' + no + ')">Edit Record</button>'
 
     trow.appendChild(controlDiv);
     tbody.appendChild(trow);
 }
 
-function AddAllItemToTable(Dustbin){
+function AddAllItemToTable(Dustbin) {
     no = 0;
     tbody.innerHTML = "";
 
     Dustbin.forEach(element => {
-        AddItemToTable(element.location,element.floar,element.no_dustbin,element.status);
+        AddItemToTable(element.location, element.floar, element.no_dustbin, element.status);
     });
 }
 
-function GetAllDataRealtime(){
-    let dbref = ref(db,"records");
+function GetAllDataRealtime() {
+    let dbref = ref(db, "records");
 
     onValue(dbref, (snapshot) => {
 
         let dustbin = [];
         snapshot.forEach((childSnapshot) => {
             dustbin.push(childSnapshot.val());
-          // ...
+            // ...
         });
         AddAllItemToTable(dustbin);
     })
@@ -84,11 +84,8 @@ let AddModebtn = document.getElementById('addModbtn');
 let updateModbtn = document.getElementById('updateModbtn');
 let deleteModbtn = document.getElementById('deleteModbtn');
 
-function FillTboxes(index){
-    console.log(dustbin_list);
-    console.log(index);
-    if(index == null)
-    {
+function FillTboxes(index) {
+    if (index == null) {
         ModLocation.value = "";
         ModFloar.value = "";
         ModDustbin.value = "";
@@ -98,12 +95,12 @@ function FillTboxes(index){
         deleteModbtn.style.display = 'none';
 
     }
-    else{
+    else {
         --index;
         ModLocation.value = dustbin_list[index][0];
         ModFloar.value = dustbin_list[index][1];
-        ModDustbin.value =  dustbin_list[index][2];
-        ModStatus.value =  dustbin_list[index][3];
+        ModDustbin.value = dustbin_list[index][2];
+        ModStatus.value = dustbin_list[index][3];
 
         AddModebtn.style.display = 'none';
         updateModbtn.style.display = 'inline-block';
