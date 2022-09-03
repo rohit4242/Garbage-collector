@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
-import { getDatabase, ref, set, update, onValue } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+import { getDatabase, ref, set, update, onValue,remove } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
 
 
 const firebaseConfig = {
@@ -17,8 +17,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-let no = 0;
-let dustbin_list = [];
+let index = 0;
+// let dustbin_list = [];
 let tbody = document.getElementById('tbody');
 function AddItemToTable(location, floar, no_dustbin, status) {
     let trow = document.createElement("tr");
@@ -30,7 +30,7 @@ function AddItemToTable(location, floar, no_dustbin, status) {
 
     dustbin_list.push([location, floar, no_dustbin, status]);
 
-    td1.innerHTML = ++no;
+    td1.innerHTML = ++index;
     td2.innerHTML = location;
     td3.innerHTML = floar;
     td4.innerHTML = no_dustbin;
@@ -43,15 +43,15 @@ function AddItemToTable(location, floar, no_dustbin, status) {
     trow.appendChild(td5);
 
     let controlDiv = document.createElement("div");
-    controlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null)">Add New Record</button>'
-    controlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(' + no + ')">Edit Record</button>'
+    controlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onClick="FillTboxes(null)">Add New Record</button>'
+    controlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onClick="FillTboxes('+index+')">Edit Record</button>'
 
     trow.appendChild(controlDiv);
     tbody.appendChild(trow);
 }
 
 function AddAllItemToTable(Dustbin) {
-    no = 0;
+    index = 0;
     tbody.innerHTML = "";
 
     Dustbin.forEach(element => {
@@ -61,7 +61,6 @@ function AddAllItemToTable(Dustbin) {
 
 function GetAllDataRealtime() {
     let dbref = ref(db, "records");
-
     onValue(dbref, (snapshot) => {
 
         let dustbin = [];
@@ -73,38 +72,44 @@ function GetAllDataRealtime() {
     })
 }
 
+AddModebtn.addEventListener('click',function(){
+    console.log('add button');
+    const reference = ref(db, 'records/db' +index);
+    set(reference, {
+      location: ModLocation.value,
+      floar: ModFloar.value,
+      no_dustbin: ModDustbin.value,
+      status: ModStatus.value
+    });
+    alert('Your Record is Added');
+    GetAllDataRealtime();
+    $("#exampleModalCenter").modal('hide');
+})
+
+updateModbtn.addEventListener('click',function(){
+    console.log('update button');
+    const reference = ref(db, 'records/db' +index);
+    update(reference, {
+      location: ModLocation.value,
+      floar: ModFloar.value,
+      no_dustbin: ModDustbin.value,
+      status: ModStatus.value
+    });
+    alert('Your Record is Updated');
+    GetAllDataRealtime();
+    $("#exampleModalCenter").modal('hide');
+})
+
+deleteModbtn.addEventListener('click',function(){
+    console.log('delete button');
+    const reference = ref(db, 'records/db' +index)
+    remove(reference);
+    alert('Your Record is Deleted');
+    GetAllDataRealtime();
+    $("#exampleModalCenter").modal('hide');
+
+})
+
+
 window.onload = GetAllDataRealtime();
 
-let ModLocation = document.getElementById('LocationMod');
-let ModFloar = document.getElementById('FloarMod');
-let ModDustbin = document.getElementById('NoDustbinMod');
-let ModStatus = document.getElementById('StatusMod');
-
-let AddModebtn = document.getElementById('addModbtn');
-let updateModbtn = document.getElementById('updateModbtn');
-let deleteModbtn = document.getElementById('deleteModbtn');
-
-function FillTboxes(index) {
-    if (index == null) {
-        ModLocation.value = "";
-        ModFloar.value = "";
-        ModDustbin.value = "";
-        ModStatus.value = "";
-        AddModebtn.style.display = 'inline-block';
-        updateModbtn.style.display = 'none';
-        deleteModbtn.style.display = 'none';
-
-    }
-    else {
-        --index;
-        ModLocation.value = dustbin_list[index][0];
-        ModFloar.value = dustbin_list[index][1];
-        ModDustbin.value = dustbin_list[index][2];
-        ModStatus.value = dustbin_list[index][3];
-
-        AddModebtn.style.display = 'none';
-        updateModbtn.style.display = 'inline-block';
-        deleteModbtn.style.display = 'inline-block';
-
-    }
-}

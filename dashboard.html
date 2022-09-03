@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="UTF-8">
@@ -46,7 +46,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="modal_body">
           <label class="labs">Location: </label>
           <input type="text" id="LocationMod"><br>
           <label class="labs">Floar: </label>
@@ -57,9 +57,9 @@
           <input type="text" id="StatusMod"><br>
         </div>
         <div class="modal-footer">
-          <button id="addModbtn" type="button" class="btn btn-primary" onclick="addRecord()">Add New Record</button>
-          <button id="updateModbtn" type="button" class="btn btn-success" onclick="updateRecord()">Update Record</button>
-          <button id="deleteModbtn" type="button" class="btn btn-danger" onclick="DeleteRecord()">Delete Record</button>
+          <button id="addModbtn" type="button" class="btn btn-primary">Add New Record</button>
+          <button id="updateModbtn" type="button" class="btn btn-success">Update Record</button>
+          <button id="deleteModbtn" type="button" class="btn btn-danger">Delete Record</button>
 
         </div>
       </div>
@@ -67,6 +67,7 @@
   </div>
    <!-- Modal end -->
   <script type="module" src="js/dashboard.js"></script>
+  <script src="js/edit_records.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
