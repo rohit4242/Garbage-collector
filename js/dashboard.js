@@ -74,13 +74,15 @@ function GetAllDataRealtime() {
 
 AddModebtn.addEventListener('click',function(){
     console.log('add button');
-    const reference = ref(db, 'records/db' +index);
+    const reference = ref(db, 'records/'+ModLocation.value);
     set(reference, {
       location: ModLocation.value,
       floar: ModFloar.value,
       no_dustbin: ModDustbin.value,
       status: ModStatus.value
-    });
+    }).then((e)=>{
+        alert("your record is not added");
+    })
     alert('Your Record is Added');
     GetAllDataRealtime();
     $("#exampleModalCenter").modal('hide');
