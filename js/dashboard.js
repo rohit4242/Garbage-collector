@@ -74,15 +74,13 @@ function GetAllDataRealtime() {
 
 AddModebtn.addEventListener('click',function(){
     console.log('add button');
-    const reference = ref(db, 'records/'+ModLocation.value);
+    const reference = ref(db, 'records/'+index);
     set(reference, {
       location: ModLocation.value,
       floar: ModFloar.value,
       no_dustbin: ModDustbin.value,
       status: ModStatus.value
-    }).then((e)=>{
-        alert("your record is not added");
-    })
+    });
     alert('Your Record is Added');
     GetAllDataRealtime();
     $("#exampleModalCenter").modal('hide');
@@ -90,7 +88,7 @@ AddModebtn.addEventListener('click',function(){
 
 updateModbtn.addEventListener('click',function(){
     console.log('update button');
-    const reference = ref(db, 'records/db' +index);
+    const reference = ref(db, 'records/' +index);
     update(reference, {
       location: ModLocation.value,
       floar: ModFloar.value,
@@ -104,7 +102,7 @@ updateModbtn.addEventListener('click',function(){
 
 deleteModbtn.addEventListener('click',function(){
     console.log('delete button');
-    const reference = ref(db, 'records/db' +index)
+    const reference = ref(db, 'records/' +index);
     remove(reference);
     alert('Your Record is Deleted');
     GetAllDataRealtime();
