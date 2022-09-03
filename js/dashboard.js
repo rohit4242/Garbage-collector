@@ -74,7 +74,7 @@ function GetAllDataRealtime() {
 
 AddModebtn.addEventListener('click',function(){
     console.log('add button');
-    const reference = ref(db, 'records/'+index);
+    const reference = ref(db, 'records/'+ModLocation.value);
     set(reference, {
       location: ModLocation.value,
       floar: ModFloar.value,
@@ -88,7 +88,7 @@ AddModebtn.addEventListener('click',function(){
 
 updateModbtn.addEventListener('click',function(){
     console.log('update button');
-    const reference = ref(db, 'records/' +index);
+    const reference = ref(db, 'records/' +ModLocation.value);
     update(reference, {
       location: ModLocation.value,
       floar: ModFloar.value,
@@ -102,7 +102,7 @@ updateModbtn.addEventListener('click',function(){
 
 deleteModbtn.addEventListener('click',function(){
     console.log('delete button');
-    const reference = ref(db, 'records/' +index);
+    const reference = ref(db, 'records/' +ModLocation.value);
     remove(reference);
     alert('Your Record is Deleted');
     GetAllDataRealtime();
