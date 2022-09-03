@@ -43,8 +43,8 @@ function AddItemToTable(location,floar,no_dustbin,status){
     trow.appendChild(td5);
 
     let controlDiv = document.createElement("div");
-    controlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null)">Add New Record</button>'
-    controlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes('+no+')">Edit Record</button>'
+    controlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onClick="FillTboxes(null)">Add New Record</button>'
+    controlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onClick="FillTboxes('+no+')">Edit Record</button>'
 
     trow.appendChild(controlDiv);
     tbody.appendChild(trow);
@@ -85,6 +85,8 @@ let updateModbtn = document.getElementById('updateModbtn');
 let deleteModbtn = document.getElementById('deleteModbtn');
 
 function FillTboxes(index){
+    console.log(dustbin_list);
+    console.log(index);
     if(index == null)
     {
         ModLocation.value = "";
