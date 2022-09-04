@@ -1,10 +1,9 @@
 body{
-    margin: 0;
-    padding: 0;
-    height: 200vh;
-    background-color: #1f1f2e;
-    font-family: sans-serif;
-    font-size: 15px;
+    /* margin: 0; */
+    /* padding: 0; */
+    /* height: 200vh; */
+    /* font-family: sans-serif; */
+    /* font-size: 15px; */
 }
 .container{
     max-width: 600px;
