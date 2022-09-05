@@ -36,6 +36,12 @@ function AddItemToTable(location, floar, no_dustbin, status) {
     td4.innerHTML = no_dustbin;
     td5.innerHTML = status;
 
+    td1.classList +="numberField";
+    td2.classList +="locationField";
+    td3.classList +="floarField";
+    td4.classList +="dustbinField";
+    td5.classList +="statusField"
+
     trow.appendChild(td1);
     trow.appendChild(td2);
     trow.appendChild(td3);
