@@ -19,6 +19,7 @@ const db = getDatabase(app);
 
 let index = 0;
 // let dustbin_list = [];
+
 let tbody = document.getElementById('tbody');
 function AddItemToTable(location, floar, no_dustbin, status) {
     let trow = document.createElement("tr");
@@ -75,6 +76,7 @@ function GetAllDataRealtime() {
             // ...
         });
         AddAllItemToTable(dustbin);
+        
     })
 }
 
