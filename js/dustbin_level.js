@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
-import { getDatabase, ref, set, update, onValue,remove } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+import { getDatabase, ref, onValue} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
 
 
 const firebaseConfig = {
@@ -18,24 +18,24 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 let root = document.querySelector(':root');
-
 let main_div = document.getElementById('row');
-
+let status_list = [];
 function AddItemToTable(location,status) {
     let sub_div = document.createElement('div');
     let tital = document.createElement('p');
     let line = document.createElement('hr');
-   
     sub_div.innerHTML = status;
-    
-    root.style.setProperty('--size',status);
+    status_list.push([location,status]);
+    // console.log(status_list);
     tital.innerText = location;
     sub_div.classList ="box";
     tital.classList = "tital";
     main_div.appendChild(sub_div);
     main_div.appendChild(tital);
     main_div.appendChild(line);
-    console.log(location);
+    // console.log(location);
+    root.style.setProperty('--'+location,status);
+    console.log(root.style.getPropertyValue('--'+location));
 }
 
 function AddAllItemToTable(Dustbin) {
