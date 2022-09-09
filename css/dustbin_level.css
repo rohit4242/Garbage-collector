@@ -1,24 +1,27 @@
 
 :root {
   --size: 10%;
-  --white: #ffffff;
 }
 
 body{
     margin: 0px;
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family:sans-serif;
     background: #222;
 }
+h1{
+    text-align: center;
+    color: white;
+}
 
 .row{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    justify-content: space-between;
+   align-items: center;
+}
+.tital{
+    text-align: center;
+    color: white;
 }
 
 .box{
@@ -34,6 +37,7 @@ body{
     text-transform: uppercase;
     position: relative;
     overflow: hidden;
+    margin: 10px;
 }
 .box::before{
     content: "";
