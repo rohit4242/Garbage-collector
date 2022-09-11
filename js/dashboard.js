@@ -21,33 +21,29 @@ let index = 0;
 // let dustbin_list = [];
 
 let tbody = document.getElementById('tbody');
-function AddItemToTable(location, floar, no_dustbin, status) {
+function AddItemToTable(location, floar, status) {
     let trow = document.createElement("tr");
     let td1 = document.createElement('td');
     let td2 = document.createElement('td');
     let td3 = document.createElement('td');
     let td4 = document.createElement('td');
-    let td5 = document.createElement('td');
 
-    dustbin_list.push([location, floar, no_dustbin, status]);
+    dustbin_list.push([location, floar, status]);
 
     td1.innerHTML = ++index;
     td2.innerHTML = location;
     td3.innerHTML = floar;
-    td4.innerHTML = no_dustbin;
-    td5.innerHTML = status;
+    td4.innerHTML = status;
 
     td1.classList +="numberField";
     td2.classList +="locationField";
     td3.classList +="floarField";
-    td4.classList +="dustbinField";
-    td5.classList +="statusField"
+    td4.classList +="statusField"
 
     trow.appendChild(td1);
     trow.appendChild(td2);
     trow.appendChild(td3);
     trow.appendChild(td4);
-    trow.appendChild(td5);
 
     let controlDiv = document.createElement("div");
     controlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onClick="FillTboxes(null)">Add New Record</button>'
@@ -62,7 +58,7 @@ function AddAllItemToTable(Dustbin) {
     tbody.innerHTML = "";
 
     Dustbin.forEach(element => {
-        AddItemToTable(element.location, element.floar, element.no_dustbin, element.status);
+        AddItemToTable(element.location, element.floar, element.status);
     });
 }
 
@@ -86,7 +82,6 @@ AddModebtn.addEventListener('click',function(){
     set(reference, {
       location: ModLocation.value,
       floar: ModFloar.value,
-      no_dustbin: ModDustbin.value,
       status: ModStatus.value
     });
     alert('Your Record is Added');
@@ -100,7 +95,6 @@ updateModbtn.addEventListener('click',function(){
     update(reference, {
       location: ModLocation.value,
       floar: ModFloar.value,
-      no_dustbin: ModDustbin.value,
       status: ModStatus.value
     });
     alert('Your Record is Updated');

@@ -5,9 +5,6 @@
 
 body{
     margin: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family:sans-serif;
     background: #222;
 }
@@ -17,10 +14,19 @@ h1{
 }
 
 .row{
-   align-items: center;
+   /* align-items: center; */
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   justify-content: space-between;
+   margin-top: 20px;
+}
+.sub_div{
+    align-items: center;
+    text-align: center;
 }
 .tital{
-    text-align: center;
+    /* text-align: center; */
     color: white;
 }
 

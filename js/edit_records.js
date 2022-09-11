@@ -1,7 +1,6 @@
 
 let ModLocation = document.getElementById('LocationMod');
 let ModFloar = document.getElementById('FloarMod');
-let ModDustbin = document.getElementById('NoDustbinMod');
 let ModStatus = document.getElementById('StatusMod');
 
 let AddModebtn = document.getElementById('addModbtn');
@@ -15,7 +14,6 @@ function FillTboxes(index)
     if (index == null) {
             ModLocation.value = "";
             ModFloar.value = "";
-            ModDustbin.value = "";
             ModStatus.value = "";
             AddModebtn.style.display = 'inline-block';
             updateModbtn.style.display = 'none';
@@ -26,8 +24,7 @@ function FillTboxes(index)
             --index;
             ModLocation.value = dustbin_list[index][0];
             ModFloar.value = dustbin_list[index][1];
-            ModDustbin.value = dustbin_list[index][2];
-            ModStatus.value = dustbin_list[index][3];
+            ModStatus.value = dustbin_list[index][2];
 
             AddModebtn.style.display = 'none';
             updateModbtn.style.display = 'inline-block';
