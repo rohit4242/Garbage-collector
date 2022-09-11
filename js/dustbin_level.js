@@ -35,8 +35,18 @@ function AddItemToTable(location,status) {
     sub_div1.appendChild(tital);
     main_div.appendChild(sub_div1);
     // console.log(location);
-    root.style.setProperty('--'+location,status);
-    console.log(root.style.getPropertyValue('--'+location));
+    // console.log(root1.style);
+    // console.log(root1);
+    // var deg= rootStyles.getPropertyValue('--size');
+    // console.log(deg); 
+    // root.style.setProperty('--'+location,status);
+    // let size = getComputedStyle(root).getPropertyValue('--size');
+    // console.log(size);
+    // root.style.setProperty('--size',status);
+    // root1.style.setProperty('--'+location,status);
+    // console.log(root.style.getPropertyValue('--'+location));
+    // console.log(document.documentElement.style);
+    // console.log(getComputedStyle(root))
 }
 
 function AddAllItemToTable(Dustbin) {
