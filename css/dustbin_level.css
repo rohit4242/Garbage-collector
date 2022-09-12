@@ -1,12 +1,14 @@
 
 :root {
   --size: 20%;
+  --background-color: rgb(58, 92, 80);
 }
 
 body{
     margin: 0px;
     font-family:sans-serif;
-    background: #222;
+    /* background: #222; */
+    background: var(--background-color);
 }
 h1{
     text-align: center;

@@ -26,7 +26,7 @@ function AddItemToTable(location,status) {
     let tital = document.createElement('p');
     sub_div1.classList = "sub_div";
     sub_div2.innerHTML = status;
-    status_list.push([location,status]);
+    status_list.push([status]);
     // console.log(status_list);
     tital.innerText = location;
     sub_div2.classList ="box";
@@ -34,19 +34,8 @@ function AddItemToTable(location,status) {
     sub_div1.appendChild(sub_div2);
     sub_div1.appendChild(tital);
     main_div.appendChild(sub_div1);
-    // console.log(location);
-    // console.log(root1.style);
-    // console.log(root1);
-    // var deg= rootStyles.getPropertyValue('--size');
-    // console.log(deg); 
-    // root.style.setProperty('--'+location,status);
-    // let size = getComputedStyle(root).getPropertyValue('--size');
-    // console.log(size);
-    // root.style.setProperty('--size',status);
-    // root1.style.setProperty('--'+location,status);
-    // console.log(root.style.getPropertyValue('--'+location));
-    // console.log(document.documentElement.style);
-    // console.log(getComputedStyle(root))
+    let bodystyle = document.body.style;
+    bodystyle.setProperty('--size',status);
 }
 
 function AddAllItemToTable(Dustbin) {
