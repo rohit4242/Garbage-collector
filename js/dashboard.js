@@ -77,6 +77,9 @@ function GetAllDataRealtime() {
 }
 
 AddModebtn.addEventListener('click',function(){
+    if(validation()==false){
+        return false;
+    }
     console.log('add button');
     const reference = ref(db, 'records/'+ModLocation.value);
     set(reference, {
@@ -90,6 +93,9 @@ AddModebtn.addEventListener('click',function(){
 })
 
 updateModbtn.addEventListener('click',function(){
+    if(validation()==false){
+        return false;
+    }
     console.log('update button');
     const reference = ref(db, 'records/' +ModLocation.value);
     update(reference, {
@@ -103,6 +109,9 @@ updateModbtn.addEventListener('click',function(){
 })
 
 deleteModbtn.addEventListener('click',function(){
+    if(validation()==false){
+        return false;
+    }
     console.log('delete button');
     const reference = ref(db, 'records/' +ModLocation.value);
     remove(reference);
@@ -115,3 +124,14 @@ deleteModbtn.addEventListener('click',function(){
 
 window.onload = GetAllDataRealtime();
 
+function validation(){
+    
+    let ModLocation = document.getElementById('LocationMod');
+    let ModFloar = document.getElementById('FloarMod');
+    let ModStatus = document.getElementById('StatusMod');
+
+    if(ModLocation.value =="" || ModFloar.value=="" || ModStatus.value==""){
+        alert("Please Fill the all fields");
+        return false;
+    }
+}
