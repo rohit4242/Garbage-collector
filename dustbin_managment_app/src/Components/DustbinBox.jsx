@@ -1,38 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const DustbinBox = () => {
-  const [level, setLevel] = useState(81);
-  const [color, setColor] = useState("red");
-
-  useEffect(() => {
-    if (level > 80 && level <= 100) {
-      setColor("teal");
-    }
-    if (level > 50 && level <= 80) {
-      setColor("yellow");
-      console.log(color);
-    }
-    if (level > 25 && level <= 50) {
-      setColor("gray");
-      console.log(color);
-    }
-    if (level > 0 && level <= 25) {
-      setColor("red");
-    }
-  }, [level, color]);
-  console.log(color);
+const DustbinBox = ({ data, name }) => {
   return (
-    <div className="w-64 h-96 m-4 p-1 bg-slate-200/50 flex flex-col justify-end rounded-md border-2 border-gray-400">
-      <div
-        className={`cursor-default bg-${color}-400 rounded-tl-xl rounded-tr-xl text-xs font-bold leading-none py-4 text-center text-white`}
-        style={{ height: `${level}%`, width: "100%" }}
-      >
-        <div className="mx-8 text-gray-800 text-2xl leading-6 tracking-wide">
-          {level + "%"}
+    <Link to={`/dustbinDetail/${name?.key}`}>
+      {" "}
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col justify-end w-32 h-48 p-1 m-4 border-2 border-gray-400 rounded-md bg-slate-200/50">
+          <div
+            className="py-4 text-xs font-bold leading-none text-center text-white bg-teal-400 cursor-default rounded-tl-xl rounded-tr-xl"
+            style={{ height: `${data?.level}%`, width: "100%" }}
+          >
+            <div className="mx-8 text-2xl leading-6 tracking-wide text-gray-800">
+              {parseInt(data?.level) + "%"}
+            </div>
+          </div>
         </div>
+        <p>{data?.address}</p>
       </div>
-
-    </div>
+    </Link>
   );
 };
 

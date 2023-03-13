@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
+import dustbin_logo from "../assets/dustbin_logo.jpg";
 const NavBar = ({ menu, setMenu, user }) => {
   const [userMemu, setUserMemu] = useState(false);
 
@@ -15,9 +16,9 @@ const NavBar = ({ menu, setMenu, user }) => {
   const handleLogout = () => {
     logOut();
     navigate("/signin");
-    localStorage.clear()
+    localStorage.clear();
   };
-  
+
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -43,16 +44,16 @@ const NavBar = ({ menu, setMenu, user }) => {
                 ></path>
               </svg>
             </button>
-            <a href="https://flowbite.com" className="flex ml-2 md:mr-24">
+            <Link to="/" className="flex ml-2 md:mr-24">
               <img
-                src="https://flowbite.com/docs/images/logo.svg"
-                className="h-8 mr-3"
-                alt="FlowBite Logo"
+                src={dustbin_logo}
+                className="w-10 h-10 mr-3"
+                alt="dustbin logo"
               />
               <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                Flowbite
+                Dustbin
               </span>
-            </a>
+            </Link>
           </div>
           <div className="flex items-center">
             <div className="flex items-center ml-3 mr-10">
@@ -67,7 +68,11 @@ const NavBar = ({ menu, setMenu, user }) => {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="w-8 h-8 rounded-full"
-                    src={user?.photoURL ? user?.photoURL :"https://flowbite.com/docs/images/people/profile-picture-5.jpg"} 
+                    src={
+                      user?.photoURL
+                        ? user?.photoURL
+                        : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    }
                     alt="user photo"
                   />
                 </button>
@@ -78,7 +83,10 @@ const NavBar = ({ menu, setMenu, user }) => {
                 } z-50 my-4 absolute duration-1000 right-6 top-16 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600`}
               >
                 <div className="px-4 py-3 " role="none">
-                  <p className="text-sm text-gray-900 dark:text-white" role="none">
+                  <p
+                    className="text-sm text-gray-900 dark:text-white"
+                    role="none"
+                  >
                     {user?.displayName}
                   </p>
                   <p
