@@ -1,8 +1,23 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
-const NavBar = ({ menu, setMenu }) => {
+const NavBar = ({ menu, setMenu, user }) => {
   const [userMemu, setUserMemu] = useState(false);
+
+  const navigate = useNavigate();
+
+  function logOut() {
+    return signOut(auth);
+  }
+
+  const handleLogout = () => {
+    logOut();
+    navigate("/signin");
+    localStorage.clear()
+  };
+  
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -52,7 +67,7 @@ const NavBar = ({ menu, setMenu }) => {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="w-8 h-8 rounded-full"
-                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    src={user?.photoURL ? user?.photoURL :"https://flowbite.com/docs/images/people/profile-picture-5.jpg"} 
                     alt="user photo"
                   />
                 </button>
@@ -64,13 +79,13 @@ const NavBar = ({ menu, setMenu }) => {
               >
                 <div className="px-4 py-3 " role="none">
                   <p className="text-sm text-gray-900 dark:text-white" role="none">
-                    Neil Sims
+                    {user?.displayName}
                   </p>
                   <p
                     className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                     role="none"
                   >
-                    neil.sims@flowbite.com
+                    {user?.email}
                   </p>
                 </div>
                 <ul className="py-1" role="none">
@@ -83,7 +98,7 @@ const NavBar = ({ menu, setMenu }) => {
                       Dashboard
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link
                       to="/listAll"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -100,12 +115,13 @@ const NavBar = ({ menu, setMenu }) => {
                     >
                       Earnings
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <a
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       role="menuitem"
+                      onClick={handleLogout}
                     >
                       Sign out
                     </a>

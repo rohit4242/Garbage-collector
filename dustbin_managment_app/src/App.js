@@ -1,21 +1,33 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Layout from "./Layout/Layout";
 import NotFound from "./Pages/NotFound";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
+import { fetchUser, userAccessToken } from "./Utils/fetchUser";
 function App() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = userAccessToken();
+    if (!accessToken) {
+      navigate("/signin", { replace: true });
+    } else {
+      const [userInfo] = fetchUser();
+      setUser(userInfo);
+    }
+  }, []);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="signIn" element={<SignIn />} />
-        <Route path="signUp" element={<SignUp />} />
+    <Routes>
+      <Route path="signIn" element={<SignIn />} />
+      <Route path="signUp" element={<SignUp />} />
 
-        <Route path="/*" element={<Layout />} />
+      <Route path="/*" element={<Layout user={user} />} />
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
